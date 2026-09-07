@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Shell({children}){return <div className="shell"><aside className="side"><div className="brand">AMI Etsy Ops<small>Publishing backend</small></div><nav className="nav"><Link href="/">Dashboard</Link><Link href="/orders/new">New order</Link><Link href="/products/hidden-door">Products</Link><Link href="/setup">Connections</Link></nav></aside><main className="main">{children}</main></div>}

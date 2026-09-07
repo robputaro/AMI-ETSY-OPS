@@ -1,0 +1,2 @@
+import { NextResponse } from 'next/server';import { cookies } from 'next/headers';import { isAuthed } from '@/lib/session';import { createPkce,etsyAuthUrl } from '@/lib/etsy';
+export async function GET(req){if(!(await isAuthed()))return NextResponse.redirect(new URL('/login',req.url));const p=createPkce();const c=await cookies();const opts={httpOnly:true,sameSite:'lax',secure:process.env.NODE_ENV==='production',maxAge:600,path:'/'};c.set('etsy_oauth_verifier',p.verifier,opts);c.set('etsy_oauth_state',p.state,opts);return NextResponse.redirect(etsyAuthUrl(p))}
